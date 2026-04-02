@@ -111,6 +111,7 @@
         overflow: hidden;
       }
       .hero img {
+        display: block;
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -204,6 +205,8 @@
         grid-template-columns: 1fr 1fr 1fr;
         gap: 2px;
         background: var(--text);
+        line-height: 0;
+        font-size: 0;
       }
       .tri-cell {
         overflow: hidden;
@@ -211,6 +214,7 @@
       }
       .tri-cell img {
         width: 100%;
+        height: 100%;
         aspect-ratio: 16/10;
         object-fit: cover;
         display: block;
@@ -316,11 +320,14 @@
 
       .wide {
         overflow: hidden;
+        line-height: 0;
+        font-size: 0;
       }
       .wide img {
         width: 100%;
         aspect-ratio: 21/9;
         object-fit: cover;
+        object-position: center top;
         display: block;
         filter: brightness(0.96) saturate(0.88);
       }
@@ -389,11 +396,15 @@
         grid-template-columns: 1fr 1fr;
         gap: 2px;
         background: var(--text);
+        line-height: 0;
+        font-size: 0;
       }
       .duo img {
         width: 100%;
+        height: 100%;
         aspect-ratio: 16/10;
         object-fit: cover;
+        object-position: center top;
         display: block;
         filter: brightness(0.97) saturate(0.9);
       }
@@ -401,9 +412,11 @@
       .mosaic {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: auto auto;
+        grid-template-rows: 1fr 1fr;
         gap: 2px;
         background: var(--text);
+        line-height: 0;
+        font-size: 0;
       }
       .mi {
         overflow: hidden;
@@ -750,6 +763,141 @@
       img.clickable {
         cursor: zoom-in;
       }
+
+      /* Print styles */
+      @media print {
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+          color-adjust: exact !important;
+        }
+        html {
+          scroll-behavior: auto;
+        }
+        body {
+          overflow: visible;
+          font-size: 11pt;
+        }
+
+        /* Hide interactive elements */
+        nav,
+        .scroll-cue,
+        .modal-overlay,
+        .mbtn {
+          display: none !important;
+        }
+
+        /* Remove animations */
+        .rv {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+        .hero-txt {
+          animation: none !important;
+          opacity: 1 !important;
+        }
+
+        /* Hero section - full page */
+        .hero {
+          height: 100vh;
+          page-break-after: always;
+          overflow: hidden;
+        }
+        .hero img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        .hero-ov {
+          display: none !important;
+        }
+
+        /* Split section - side by side */
+        .split {
+          display: grid !important;
+          grid-template-columns: 1fr 1fr !important;
+          min-height: auto;
+        }
+        .split-img {
+          max-height: none;
+          aspect-ratio: auto;
+        }
+        .split-txt {
+          padding: 3rem !important;
+        }
+
+        /* Images - fill page, no gaps */
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+        .triptych,
+        .duo,
+        .mosaic,
+        .wide {
+          background: none;
+        }
+        .tri-cell,
+        .duo,
+        .wide,
+        .mi {
+          overflow: hidden;
+        }
+        .tri-cell img,
+        .duo img,
+        .wide img,
+        .mi img,
+        .split-img img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          filter: none;
+        }
+        .tri-cell .lb {
+          opacity: 1;
+          transform: none;
+        }
+
+        /* Wide image before filmography */
+        .wide {
+          page-break-before: always;
+          break-before: page;
+        }
+        .wide img {
+          aspect-ratio: 21/8 !important;
+        }
+
+        /* Filmography */
+        .filmo {
+          padding: 2rem;
+        }
+
+        /* Extra section */
+        .extra {
+          padding: 2rem;
+        }
+
+        /* Footer */
+        footer {
+          padding: 3rem 2rem;
+        }
+
+        /* Page break for Theatre section */
+        .print-page-break {
+          page-break-before: always;
+          break-before: page;
+        }
+
+        /* General print settings */
+        a {
+          text-decoration: none !important;
+          color: inherit !important;
+        }
+        img.clickable {
+          cursor: default;
+        }
+      }
     </style>
   </head>
   <body>
@@ -992,7 +1140,7 @@
           <div>
             <div class="cl">YouTube</div>
             <a href="https://www.youtube.com/@chunglimee" target="_blank"
-              >@chunglimee</a
+              >청림(Chunglim)</a
             >
           </div>
           <div>
